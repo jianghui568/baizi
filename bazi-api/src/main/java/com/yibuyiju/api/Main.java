@@ -1,4 +1,4 @@
-package com.yibuyiju;
+package com.yibuyiju.api;
 
 /**
  * @author yjh
