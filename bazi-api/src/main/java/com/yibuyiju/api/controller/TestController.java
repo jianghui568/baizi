@@ -1,5 +1,6 @@
 package com.yibuyiju.api.controller;
 
+import com.yibuyiju.api.dto.TesterInfoDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,15 +22,14 @@ public class TestController {
         log.error("xxxxxxxxxxxxx{}", 000000000000);
         System.err.println("xxxxxxxxxxxxxx");
         return "xxxxxxx";
-
     }
 
 
     @PostMapping("/test1")
-    public String index1() {
+    public String index1(@RequestBody TesterInfoDTO testerInfoDTO) {
 
-        log.error("xxxxxxxxxxxx1111111x{}", 000000000000);
-        System.err.println("xxxxxxxxxxxxxx");
+        log.error("xxxxxxxxxxxx1111111x{}", testerInfoDTO);
+        System.err.println(testerInfoDTO);
         return "xxxxxxx";
 
     }
