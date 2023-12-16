@@ -5,3 +5,18 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/aaaa?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleted #这个是假删除（非必要配置）
+#
+#mybatis-plus:
+#  mapper-locations: classpath:mybatis/*Mapper.xml
+#mybatis:
+#  configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

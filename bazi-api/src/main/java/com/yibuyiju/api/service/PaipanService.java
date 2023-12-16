@@ -8,4 +8,6 @@ package com.yibuyiju.api.service;
 public class PaipanService {
 
     // public void
+
+
 }
