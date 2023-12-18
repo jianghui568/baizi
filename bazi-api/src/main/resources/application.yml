@@ -11,7 +11,9 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+
 mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
   global-config:
     db-config:
       logic-delete-field: deleted #这个是假删除（非必要配置）

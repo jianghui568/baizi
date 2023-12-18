@@ -5,7 +5,7 @@ import com.yibuyiju.common.threadlocal.BaseContext;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -25,26 +25,21 @@ public class MybatisMetaHandler implements MetaObjectHandler {
      */
     @Override
     public void insertFill(MetaObject metaObject) {
-        System.err.println("created start !!!!!!!!!");
-        System.err.println(metaObject);
         if (Objects.isNull(metaObject.getValue("updaterId"))) {
-            this.setFieldValByName("updaterId", BaseContext.getCurrentId(), metaObject);
+            this.strictInsertFill(metaObject, "updaterId", Long.class, BaseContext.getCurrentId());
         }
         if (Objects.isNull(metaObject.getValue("creatorId"))) {
-            this.setFieldValByName("creatorId", BaseContext.getCurrentId(), metaObject);
+            this.strictInsertFill(metaObject, "creatorId", Long.class, BaseContext.getCurrentId());
         }
         if (Objects.isNull(metaObject.getValue("createdAt"))) {
-            this.setFieldValByName("createdAt", new Date(), metaObject);
+            this.strictInsertFill(metaObject, "createdAt", LocalDateTime.class, LocalDateTime.now());
         }
         if (Objects.isNull(metaObject.getValue("updatedAt"))) {
-            this.setFieldValByName("updatedAt", new Date(), metaObject);
+            this.strictInsertFill(metaObject, "updatedAt", LocalDateTime.class, LocalDateTime.now());
         }
         if (Objects.isNull(metaObject.getValue("deleted"))) {
-            this.setFieldValByName("deleted", new Date(), metaObject);
+            this.strictInsertFill(metaObject, "deleted", Boolean.class, false);
         }
-        System.err.println(metaObject);
-
-        System.err.println("created end !!!!!!!!!");
     }
 
     /**
@@ -54,21 +49,16 @@ public class MybatisMetaHandler implements MetaObjectHandler {
      */
     @Override
     public void updateFill(MetaObject metaObject) {
-        System.err.println("updated start !!!!!!!!!");
         System.err.println(metaObject);
         if (Objects.isNull(metaObject.getValue("updaterId"))) {
-            this.setFieldValByName("updaterId", BaseContext.getCurrentId(), metaObject);
+            this.strictUpdateFill(metaObject, "updaterId", Long.class, BaseContext.getCurrentId());
         }
         if (Objects.isNull(metaObject.getValue("updatedAt"))) {
-            this.setFieldValByName("updatedAt", new Date(), metaObject);
+            this.strictUpdateFill(metaObject, "updatedAt", Long.class, BaseContext.getCurrentId());
         }
         if (Objects.isNull(metaObject.getValue("deleted"))) {
-            this.setFieldValByName("deleted", new Date(), metaObject);
+            this.strictUpdateFill(metaObject, "deleted", Boolean.class, false);
         }
-
-        System.err.println(metaObject);
-
-        System.err.println("updated end !!!!!!!!!");
     }
 
 }

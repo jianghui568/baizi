@@ -23,7 +23,7 @@ public class UserService {
         UserEntity userEntity = new UserEntity();
         // BeanUtils.copyProperties(userInfoDTO, userEntity);
         userEntity.username(userInfoDTO.username());
-        userMapper.insert(userEntity);
+        userMapper.hahaUser(userEntity);
     }
 }
 

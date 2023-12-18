@@ -27,7 +27,7 @@ public class TestController {
 
     @GetMapping("/test")
     public String index() {
-        log.error("xxxxxxxxxxxxx{}", 000000000000);
+        log.error("xxxxxxxxxxxxxqqqqq{}", 000000666666);
 
         UserInfoDTO userInfoDTO = new UserInfoDTO();
         userInfoDTO.username("xxxxxxxxxxxxx");
@@ -35,7 +35,7 @@ public class TestController {
 
         userService.saveUser(userInfoDTO);
 
-        System.err.println("xxxxxxxxxxxxxx");
+        System.err.println("xxxxxxxxxxxxxxbbbbb");
         return "xxxxxxx";
     }
 

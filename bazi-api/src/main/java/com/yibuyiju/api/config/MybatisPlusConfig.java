@@ -18,13 +18,13 @@ import java.io.IOException;
 @Configuration
 @MapperScan("com.yibuyiju.api.mapper")
 public class MybatisPlusConfig {
-    @Bean
-    public PaginationInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
-    }
+    // @Bean
+    // public PaginationInterceptor paginationInterceptor() {
+    //     return new PaginationInterceptor();
+    // }
 
-    @Bean
-    public MybatisMetaHandler myMetaObjectHandler() {
-        return new MybatisMetaHandler();
-    }
+    // @Bean
+    // public MybatisMetaHandler myMetaObjectHandler() {
+    //     return new MybatisMetaHandler();
+    // }
 }

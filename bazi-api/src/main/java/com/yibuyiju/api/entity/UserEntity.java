@@ -18,9 +18,4 @@ import java.time.LocalDateTime;
 @Accessors(chain = true, fluent = true)
 public class UserEntity extends BaseEntity {
     private String username;
-    private LocalDateTime updatedAt;
-    private LocalDateTime createdAt;
-    private Long creatorId;
-    private Long updaterId;
-    private Boolean deleted;
 }

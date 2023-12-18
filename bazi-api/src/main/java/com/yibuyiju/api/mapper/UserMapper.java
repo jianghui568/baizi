@@ -9,4 +9,6 @@ import com.yibuyiju.api.entity.UserEntity;
  */
 public interface UserMapper extends BaseMapper<UserEntity> {
 
+    int hahaUser(UserEntity userEntity);
+
 }

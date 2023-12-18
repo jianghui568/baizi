@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version 1.0
  * @date 2023/11/30 10:18
  */
-@MapperScan("com.yibuyiju.api.mapper")
+
 @SpringBootApplication(scanBasePackages = "com.yibuyiju.*")
 public class ApiApplication {
     public static void main(String[] args) {
