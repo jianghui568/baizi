@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 真太阳时计算
  * https://github.com/hkargv/paipan/blob/master/lib/class.paipan.php
  *
  * @author yjh

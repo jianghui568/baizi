@@ -1,9 +1,14 @@
 package com.yibuyiju.api.dto;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.yibuyiju.api.enums.CalendarEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
 
 /**
  * @author yjh
@@ -17,10 +22,12 @@ public class TesterInfoDTO {
     private Boolean isSolarTime;
 
     @ApiModelProperty(value = "1阳历，2阴历")
+    @EnumValue
     private CalendarEnum calendarType;
 
     @ApiModelProperty(value = "生日")
-    private String birthday;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime birthday;
 
     @ApiModelProperty(value = "性别")
     private Integer gender;

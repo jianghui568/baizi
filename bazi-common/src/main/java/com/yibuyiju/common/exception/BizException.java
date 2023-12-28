@@ -9,7 +9,7 @@ import com.yibuyiju.common.response.ResponseCode;
  * @date 2023/10/27 11:15
  */
 public class BizException extends RuntimeException {
-    private ResponseCode errorCode;
+    protected ResponseCode errorCode;
 
     public BizException(ResponseCode errorCode) {
         super(errorCode.getMessage());

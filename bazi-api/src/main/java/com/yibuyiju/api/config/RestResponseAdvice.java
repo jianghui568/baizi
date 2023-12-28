@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
+import springfox.documentation.swagger.web.ApiResourceController;
 
 /**
  * @author yjh
@@ -28,8 +29,18 @@ public class RestResponseAdvice implements ResponseBodyAdvice<Object> {
      */
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
+        String path = returnType.getExecutable().getDeclaringClass().getName();
+        if (path.contains("swagger") || path.contains("Swagger")) {
+            return false;
+        }
+
         // 如果接口返回的类型本身就是Response那就没有必要进行额外的操作，返回false
         if (returnType.getGenericParameterType().equals(Response.class)) {
+            return false;
+        }
+
+        // swagger
+        if (returnType.getContainingClass().getName().equals("springfox.documentation.swagger.web.ApiResourceController")) {
             return false;
         }
         // 对类或者方法上面注解了@RestController 或者 @ResponseBody 的方法统一处理
@@ -42,6 +53,7 @@ public class RestResponseAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+
 
         // 防止重复包裹的问题出现
         if (body instanceof Response) {

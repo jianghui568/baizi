@@ -43,8 +43,14 @@ public class SwaggerConfig {
     // docket容器设置我们的文档基础信息，api包的位置，以及路径的匹配规则（包含四种：全匹配，不匹配，正则匹配和ant匹配）
     @Bean
     public Docket docket() {
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage("com.yibuyiju.controller")) // 这里请替换成自己的包名
-                .paths(PathSelectors.any()).build().globalOperationParameters(this.getParameterList()).securityContexts(securityContexts());// 全局配置
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.yibuyiju.api.controller"))
+                .paths(PathSelectors.any())
+                .build()
+                .globalOperationParameters(this.getParameterList())
+                .securityContexts(securityContexts());// 全局配置
     }
 
     private List<SecurityContext> securityContexts() {

@@ -31,7 +31,7 @@ public enum CalendarEnum {
     }
 
 
-    public static Boolean hasValue(Integer val) {
+    public static boolean hasValue(Integer val) {
         CalendarEnum[] types = CalendarEnum.values();
         Optional<CalendarEnum> exist = Arrays.stream(types).filter(item -> item.getValue().equals(val)).findFirst();
         return exist.isPresent();
