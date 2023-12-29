@@ -1,8 +1,11 @@
 package com.yibuyiju.api.enums;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+
 import java.util.Arrays;
-import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -10,8 +13,9 @@ import java.util.Optional;
  * @version 1.0
  * @date 2023/12/14 17:42
  */
+@Getter
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum GenderEnum {
-    UNKNOWN(0, "未知"),
     MAN(1, "男"),
     WOMEN(2, "女");
 
@@ -23,28 +27,23 @@ public enum GenderEnum {
         this.text = description;
     }
 
-    public String getText() {
-        return this.text;
-    }
-
-    public Integer getValue() {
-        return this.value;
-    }
-
-
-    public static Boolean hasValue(Integer val) {
+    public static Boolean contain(GenderEnum e) {
         GenderEnum[] types = GenderEnum.values();
-        Optional<GenderEnum> exist = Arrays.stream(types).filter(item -> item.getValue().equals(val)).findFirst();
+        Optional<GenderEnum> exist = Arrays.stream(types).filter(item -> item.equals(e)).findFirst();
         return exist.isPresent();
     }
 
-    public static List<EnumIntOption> toOptionArray() {
-        List<EnumIntOption> list = new ArrayList<>();
-
-        Arrays.stream(GenderEnum.values()).forEach(item -> {
-            EnumIntOption option = new EnumIntOption();
-            list.add(option.text(item.getText()).value(item.getValue()));
-        });
-        return list;
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
+    public static GenderEnum getByValue(Integer value) {
+        if (Objects.isNull(value)) {
+            return null;
+        }
+        for (GenderEnum gender : GenderEnum.values()) {
+            if (gender.value.equals(value)) {
+                return gender;
+            }
+        }
+        return null;
     }
+
 }

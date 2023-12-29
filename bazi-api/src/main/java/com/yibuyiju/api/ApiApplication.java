@@ -1,8 +1,9 @@
 package com.yibuyiju.api;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
  * @author yjh
@@ -13,6 +14,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(scanBasePackages = "com.yibuyiju.*")
 public class ApiApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ApiApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(ApiApplication.class, args);
+        ConfigurableEnvironment env = context.getEnvironment();
+
+        String port = env.getProperty("server.port");
+        String swaggerUrl = port + "/swagger-ui.html";
+        System.err.println("================================= \r\n" +
+                "=========== swagger url: " + swaggerUrl + " \r\n" +
+                "========================================");
     }
 }

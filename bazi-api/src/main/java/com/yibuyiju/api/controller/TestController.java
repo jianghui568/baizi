@@ -1,6 +1,5 @@
 package com.yibuyiju.api.controller;
 
-import cn.hutool.system.UserInfo;
 import com.yibuyiju.api.dto.TesterInfoDTO;
 import com.yibuyiju.api.dto.UserInfoDTO;
 import com.yibuyiju.api.service.UserService;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -37,6 +35,13 @@ public class TestController {
 
         System.err.println("xxxxxxxxxxxxxxbbbbb");
         return "xxxxxxx";
+    }
+
+
+    @PostMapping("/test3")
+    public Object save(@RequestBody TesterInfoDTO test) {
+
+        return test;
     }
 
 

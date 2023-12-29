@@ -29,6 +29,8 @@ public class RestResponseAdvice implements ResponseBodyAdvice<Object> {
      */
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
+
+        // 排除swagger相关的api
         String path = returnType.getExecutable().getDeclaringClass().getName();
         if (path.contains("swagger") || path.contains("Swagger")) {
             return false;

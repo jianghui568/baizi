@@ -1,8 +1,11 @@
 package com.yibuyiju.api.enums;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+
 import java.util.Arrays;
-import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -10,6 +13,8 @@ import java.util.Optional;
  * @version 1.0
  * @date 2023/12/14 17:42
  */
+@Getter
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum CalendarEnum {
     SOLAR(1, "阳历"),
     LUNAR(2, "阴历");
@@ -22,28 +27,22 @@ public enum CalendarEnum {
         this.text = description;
     }
 
-    public String getText() {
-        return this.text;
-    }
-
-    public Integer getValue() {
-        return this.value;
-    }
-
-
-    public static boolean hasValue(Integer val) {
+    public static boolean contain(CalendarEnum e) {
         CalendarEnum[] types = CalendarEnum.values();
-        Optional<CalendarEnum> exist = Arrays.stream(types).filter(item -> item.getValue().equals(val)).findFirst();
+        Optional<CalendarEnum> exist = Arrays.stream(types).filter(item -> item.equals(e)).findFirst();
         return exist.isPresent();
     }
 
-    public static List<EnumIntOption> toOptionArray() {
-        List<EnumIntOption> list = new ArrayList<>();
-
-        Arrays.stream(CalendarEnum.values()).forEach(item -> {
-            EnumIntOption option = new EnumIntOption();
-            list.add(option.text(item.getText()).value(item.getValue()));
-        });
-        return list;
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
+    public static CalendarEnum getByValue(Integer value) {
+        if (Objects.isNull(value)) {
+            return null;
+        }
+        for (CalendarEnum e : CalendarEnum.values()) {
+            if (e.value.equals(value)) {
+                return e;
+            }
+        }
+        return null;
     }
 }

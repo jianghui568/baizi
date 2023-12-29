@@ -1,13 +1,12 @@
 package com.yibuyiju.api.dto;
 
-import com.baomidou.mybatisplus.annotation.EnumValue;
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yibuyiju.api.enums.CalendarEnum;
+import com.yibuyiju.api.enums.GenderEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -15,20 +14,21 @@ import java.time.LocalDateTime;
  * @version 1.0
  * @date 2023/12/14 17:31
  */
-@Accessors(chain = true, fluent = true)
+
 @Data
-public class TesterInfoDTO {
+public class TesterInfoDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
+    //
     @ApiModelProperty(value = "是否为真太阳时")
     private Boolean isSolarTime;
 
     @ApiModelProperty(value = "1阳历，2阴历")
-    @EnumValue
     private CalendarEnum calendarType;
 
     @ApiModelProperty(value = "生日")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private LocalDateTime birthday;
 
     @ApiModelProperty(value = "性别")
-    private Integer gender;
+    private GenderEnum gender;
 }

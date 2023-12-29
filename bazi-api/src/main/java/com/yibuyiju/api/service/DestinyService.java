@@ -1,7 +1,6 @@
 package com.yibuyiju.api.service;
 
 import com.nlf.calendar.Lunar;
-import com.nlf.calendar.Solar;
 import com.yibuyiju.api.dto.PredictInfoDTO;
 import com.yibuyiju.api.dto.TesterInfoDTO;
 import com.yibuyiju.api.enums.CalendarEnum;
@@ -19,19 +18,26 @@ public class DestinyService {
 
     public PredictInfoDTO baziInfo(TesterInfoDTO testerInfoDTO) {
 
-        if (!CalendarEnum.hasValue(testerInfoDTO.calendarType().getValue())) {
+        if (!CalendarEnum.contain(testerInfoDTO.getCalendarType())) {
             throw new VerifyBizException("日历类型错误！");
         }
 
-        Lunar lunar = Lunar.fromDate(Helps.localDateTimeToDate(testerInfoDTO.birthday()));
+        Lunar lunar;
+
         // 阳历
-        if (testerInfoDTO.calendarType().equals(CalendarEnum.SOLAR)) {
-            Solar solar = Solar.fromDate(Helps.localDateTimeToDate(testerInfoDTO.birthday()));
-            lunar = solar.getLunar();
+        if (testerInfoDTO.getCalendarType().equals(CalendarEnum.SOLAR)) {
+            lunar = Lunar.fromDate(Helps.localDateTimeToDate(testerInfoDTO.getBirthday()));
+        } else {
+            lunar = Lunar.fromYmdHms(
+                    testerInfoDTO.getBirthday().getYear(),
+                    testerInfoDTO.getBirthday().getMonthValue(),
+                    testerInfoDTO.getBirthday().getDayOfMonth(),
+                    testerInfoDTO.getBirthday().getHour(),
+                    testerInfoDTO.getBirthday().getMinute(),
+                    0
+            );
         }
 
-        PredictInfoDTO predictInfo = PredictInfoDTO.fromLunar(lunar);
-
-        return predictInfo;
+        return PredictInfoDTO.fromLunar(lunar, testerInfoDTO.getGender());
     }
 }

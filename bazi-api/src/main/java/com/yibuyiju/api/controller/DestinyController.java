@@ -4,6 +4,7 @@ import com.yibuyiju.api.dto.PredictInfoDTO;
 import com.yibuyiju.api.dto.TesterInfoDTO;
 import com.yibuyiju.api.service.DestinyService;
 import io.swagger.annotations.ApiOperation;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0
  * @date 2023/12/26 15:46
  */
+@Getter
 @RestController
 public class DestinyController {
 

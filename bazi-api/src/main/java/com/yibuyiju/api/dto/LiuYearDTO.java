@@ -15,18 +15,18 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class PredictInfoDTO {
+public class LiuYearDTO {
 
     private String lunar;
     private String solar;
     private EightCharDTO eightChar;
 
 
-    public static PredictInfoDTO fromLunar(Lunar lunar, GenderEnum genderEnum) {
+    public static LiuYearDTO fromLunar(Lunar lunar, GenderEnum genderEnum) {
         EightChar eightChar = lunar.getEightChar();
         Yun yun = eightChar.getYun(genderEnum.getValue());
-        // yun.getDaYun()
-        PredictInfoDTO predictInfo = new PredictInfoDTO();
+
+        LiuYearDTO predictInfo = new LiuYearDTO();
 
         predictInfo.setEightChar(EightCharDTO.fromEightChar(eightChar));
 
