@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-public class DaYunDTO {
+public class XiaoYunDTO {
     private Integer startYear;
     private Integer endYear;
     private Integer startAge;
@@ -25,9 +25,8 @@ public class DaYunDTO {
     private List<LiuYearDTO> liuYearList;
 
 
-    public static DaYunDTO fromDaYun(DaYun daYun) {
-
-        DaYunDTO da = new DaYunDTO();
+    public static XiaoYunDTO fromDaYun(DaYun daYun) {
+        XiaoYunDTO da = new XiaoYunDTO();
         da.setStartYear(daYun.getStartYear())
                 .setEndYear(daYun.getEndYear())
                 .setStartAge(daYun.getStartAge())

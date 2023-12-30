@@ -9,6 +9,8 @@ import com.yibuyiju.common.exception.VerifyBizException;
 import org.springframework.stereotype.Service;
 
 /**
+ * https://6tail.cn/calendar/api.html
+ *
  * @author yjh
  * @version 1.0
  * @date 2023/11/30 14:41

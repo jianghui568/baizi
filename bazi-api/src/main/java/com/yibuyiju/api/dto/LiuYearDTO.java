@@ -3,6 +3,7 @@ package com.yibuyiju.api.dto;
 import com.nlf.calendar.EightChar;
 import com.nlf.calendar.Lunar;
 import com.nlf.calendar.LunarTime;
+import com.nlf.calendar.eightchar.LiuNian;
 import com.nlf.calendar.eightchar.Yun;
 import com.yibuyiju.api.enums.GenderEnum;
 import lombok.Data;
@@ -17,23 +18,19 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class LiuYearDTO {
 
-    private String lunar;
-    private String solar;
-    private EightCharDTO eightChar;
+    private Integer year;
+    private Integer age;
+    private String ganZhi;
+    private String xun;
+    private String xunKong;
 
-
-    public static LiuYearDTO fromLunar(Lunar lunar, GenderEnum genderEnum) {
-        EightChar eightChar = lunar.getEightChar();
-        Yun yun = eightChar.getYun(genderEnum.getValue());
-
-        LiuYearDTO predictInfo = new LiuYearDTO();
-
-        predictInfo.setEightChar(EightCharDTO.fromEightChar(eightChar));
-
-        LunarTime lunarTime = lunar.getTime();
-        predictInfo.setLunar(lunar.getYearInChinese() + " " + lunar.getMonthInChinese() + " " + lunar.getDayInChinese() + " " + lunarTime.getZhi());
-
-        predictInfo.setSolar(lunar.getSolar().toYmdHms());
-        return predictInfo;
+    public static LiuYearDTO fromLunar(LiuNian liuNian) {
+        LiuYearDTO nian = new LiuYearDTO();
+        nian.setYear(liuNian.getYear())
+                .setAge(liuNian.getAge())
+                .setGanZhi(liuNian.getGanZhi())
+                .setXun(liuNian.getXun())
+                .setXunKong(liuNian.getXunKong());
+        return nian;
     }
 }
