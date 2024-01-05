@@ -1,12 +1,7 @@
 package com.yibuyiju.api.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
-
-import java.time.LocalDateTime;
 
 /**
  * @author yjh
@@ -15,7 +10,10 @@ import java.time.LocalDateTime;
  */
 @TableName(value = "user")
 @Data
-@Accessors(chain = true, fluent = true)
 public class UserEntity extends BaseEntity {
+    private String phone;
+    private String password;
     private String username;
+    private String useragent;
+    private String ip;
 }

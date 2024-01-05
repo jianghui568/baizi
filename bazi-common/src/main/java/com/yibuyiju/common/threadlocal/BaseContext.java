@@ -13,6 +13,7 @@ public class BaseContext {
     }
 
     public static Long getCurrentId() {
-        return threadLocal.get();
+        Long id = threadLocal.get();
+        return id == null ? 0 : id;
     }
 }

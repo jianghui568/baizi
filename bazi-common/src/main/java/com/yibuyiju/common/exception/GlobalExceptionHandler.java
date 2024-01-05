@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
         if (bindingResult.hasErrors()) {
             FieldError fieldError = bindingResult.getFieldError();
             if (fieldError != null) {
-                message = fieldError.getField() + fieldError.getDefaultMessage();
+                message = fieldError.getDefaultMessage();
             }
         }
         return Response.validateFailed(message);
@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
         if (bindingResult.hasErrors()) {
             FieldError fieldError = bindingResult.getFieldError();
             if (fieldError != null) {
-                message = fieldError.getField() + fieldError.getDefaultMessage();
+                message = fieldError.getDefaultMessage();
             }
         }
         return Response.validateFailed(message);

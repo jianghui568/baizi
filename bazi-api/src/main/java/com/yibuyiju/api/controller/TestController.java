@@ -1,9 +1,10 @@
 package com.yibuyiju.api.controller;
 
 import com.yibuyiju.api.dto.TesterInfoDTO;
-import com.yibuyiju.api.dto.UserInfoDTO;
+import com.yibuyiju.api.dto.UserDTO;
+import com.yibuyiju.api.entity.UserEntity;
+import com.yibuyiju.api.mapstruct.UserConverter;
 import com.yibuyiju.api.service.UserService;
-import com.yibuyiju.common.threadlocal.BaseContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,11 +28,12 @@ public class TestController {
     public String index() {
         log.error("xxxxxxxxxxxxxqqqqq{}", 000000666666);
 
-        UserInfoDTO userInfoDTO = new UserInfoDTO();
-        userInfoDTO.username("xxxxxxxxxxxxx");
-        BaseContext.setCurrentId(12L);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setPhone("xxxxxxxxxxxxx");
+        userDTO.setUseragent("1111");
 
-        userService.saveUser(userInfoDTO);
+        UserEntity entity = UserConverter.INSTANCE.toEntity(userDTO);
+
 
         System.err.println("xxxxxxxxxxxxxxbbbbb");
         return "xxxxxxx";
