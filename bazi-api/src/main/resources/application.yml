@@ -1,5 +1,10 @@
 server:
   port: 7777
+  servlet:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
 
 spring:
   mvc:
@@ -14,7 +19,11 @@ spring:
 logging:
   level:
     root: DEBUG
-
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: debug
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
