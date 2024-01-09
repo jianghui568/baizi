@@ -85,4 +85,23 @@ public class JwtUtil {
                 .authorities(CollUtil.toList("ADMIN"))
                 .build();
     }
+
+    /**
+     * 生成token
+     *
+     * @param userId
+     * @param expire 有效时长(秒)
+     * @return
+     */
+    public static PayloadDTO generatePayload(long userId, long expire) {
+        long now = System.currentTimeMillis();
+        return PayloadDTO.builder()
+                .sub(String.valueOf(userId))
+                .iat(now)
+                .exp(now + expire * 1000)
+                .jti(UUID.randomUUID().toString())
+                .username(String.valueOf(userId))
+                .id(userId)
+                .build();
+    }
 }

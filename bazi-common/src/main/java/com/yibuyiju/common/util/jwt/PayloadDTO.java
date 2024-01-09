@@ -25,13 +25,16 @@ public class PayloadDTO {
     private Long iat;
 
     @ApiModelProperty("过期时间")
-    private Long exp;
+    private long exp;
 
     @ApiModelProperty("JWT ID")
     private String jti;
 
     @ApiModelProperty("用户名")
     private String username;
+
+    @ApiModelProperty("用户Id")
+    private Long id;
 
     @ApiModelProperty("用户权限")
     private List<String> authorities;

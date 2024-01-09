@@ -19,5 +19,13 @@ public class TestJwtUtil {
         PayloadDTO payload = JwtUtil.verifyToken(token);
 
         Assert.isTrue(payload.getUsername().equals(payloadDTO.getUsername()), "except username:" + payloadDTO.getUsername() + "; but got:" + payloadDTO.getUsername());
+
+        payloadDTO = JwtUtil.generatePayload(1, 1000);
+
+        token = JwtUtil.generateToken(payloadDTO);
+
+        payload = JwtUtil.verifyToken(token);
+
+        Assert.isTrue(payload.getUsername().equals(payloadDTO.getUsername()), "except username:" + payloadDTO.getUsername() + "; but got:" + payloadDTO.getUsername());
     }
 }

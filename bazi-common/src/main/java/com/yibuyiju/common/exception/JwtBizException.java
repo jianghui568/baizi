@@ -22,6 +22,7 @@ public class JwtBizException extends BizException {
 
     public JwtBizException(String message) {
         super(message);
+        this.errorCode = ResponseCode.UNAUTHORIZED;
     }
 
     public JwtBizException(Throwable cause) {

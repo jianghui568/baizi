@@ -6,14 +6,13 @@ package com.yibuyiju.common.threadlocal;
  * @date 2023/12/16 17:02
  */
 public class BaseContext {
-    private static ThreadLocal<Long> threadLocal = new ThreadLocal<>();
+    private static ThreadLocal<ILoginUser> threadUser = new ThreadLocal<>();
 
-    public static void setCurrentId(Long id) {
-        threadLocal.set(id);
+    public static void setLoginUser(ILoginUser user) {
+        threadUser.set(user);
     }
 
-    public static Long getCurrentId() {
-        Long id = threadLocal.get();
-        return id == null ? 0 : id;
+    public static ILoginUser getLoginUser() {
+        return threadUser.get();
     }
 }

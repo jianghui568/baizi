@@ -1,6 +1,8 @@
 package com.yibuyiju.api.controller;
 
+import com.yibuyiju.api.dto.LoginDTO;
 import com.yibuyiju.api.dto.UserDTO;
+import com.yibuyiju.api.model.TokenInfo;
 import com.yibuyiju.api.service.UserService;
 import com.yibuyiju.common.exception.VerifyBizException;
 import com.yibuyiju.common.util.ClientUtil;
@@ -24,8 +26,8 @@ public class AuthController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/auth/login")
-    public void login(@RequestBody @Valid UserDTO user) {
+    @PostMapping("/auth/register")
+    public void register(@RequestBody @Valid UserDTO user) {
         if (!user.getPassword().equals(user.getPasswordConfirm())) {
             throw new VerifyBizException("两次密码输入不一致");
         }
@@ -33,6 +35,15 @@ public class AuthController {
         user.setUseragent(ClientUtil.getUserAgent());
         user.setIp(ClientUtil.getIpAddr());
 
-        userService.login(user);
+        userService.register(user);
+    }
+
+    @PostMapping("/auth/login")
+    public TokenInfo login(@RequestBody @Valid LoginDTO loginDTO) {
+
+        loginDTO.setUseragent(ClientUtil.getUserAgent());
+        loginDTO.setIp(ClientUtil.getIpAddr());
+
+        return userService.login(loginDTO);
     }
 }
