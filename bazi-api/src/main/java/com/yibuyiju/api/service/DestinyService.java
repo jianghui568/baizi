@@ -40,6 +40,9 @@ public class DestinyService {
             );
         }
 
-        return PredictInfoDTO.fromLunar(lunar, testerInfoDTO.getGender());
+        PredictInfoDTO info = PredictInfoDTO.fromLunar(lunar, testerInfoDTO.getGender());
+        info.setName(testerInfoDTO.getName());
+        info.setGender(testerInfoDTO.getGender().getText());
+        return info;
     }
 }

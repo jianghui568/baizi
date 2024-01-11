@@ -24,6 +24,11 @@ import java.util.Objects;
 @Accessors(chain = true)
 public class PredictInfoDTO {
 
+    private String name;
+    private String gender;
+    private String xingZuo;
+    private String xiu;
+
     private String lunar;
     private String fullDescription;
     private String solar;
@@ -37,12 +42,19 @@ public class PredictInfoDTO {
     private String jieQiNext;
     private String jieQiNextDateTime;
     private String gong;
+    private String kongYear;
+    private String gongMonth;
+    private String gongDay;
+    private String gongHour;
     private EightCharDTO eightChar;
     private List<DaYunDTO> daYunList;
 
     public static PredictInfoDTO fromLunar(Lunar lunar, GenderEnum genderEnum) {
         PredictInfoDTO predictInfo = new PredictInfoDTO();
 
+        predictInfo.setXingZuo(lunar.getSolar().getXingZuo());
+
+        predictInfo.setXiu(lunar.getXiu());
         predictInfo.setFullDescription(lunar.toFullString());
 
         predictInfo.setShengXiao(lunar.getYearShengXiao());
