@@ -1,10 +1,10 @@
-package com.yibuyiju.api.dto;
+package com.yibuyiju.api.vo;
 
 import com.nlf.calendar.EightChar;
 import com.nlf.calendar.Lunar;
 import com.nlf.calendar.LunarTime;
 import com.nlf.calendar.eightchar.Yun;
-import com.yibuyiju.api.enums.GenderEnum;
+import com.yibuyiju.api.dto.TesterDTO;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -22,8 +22,9 @@ import java.util.Objects;
  */
 @Data
 @Accessors(chain = true)
-public class PredictInfoDTO {
+public class PredictInfoVO {
 
+    private List<PredictBaseInfoVO> baseInfoList;
     private String lunar;
     private String fullDescription;
     private String solar;
@@ -37,11 +38,11 @@ public class PredictInfoDTO {
     private String jieQiNext;
     private String jieQiNextDateTime;
     private String gong;
-    private EightCharDTO eightChar;
-    private List<DaYunDTO> daYunList;
+    private EightCharVO eightChar;
+    private List<DaYunVO> daYunList;
 
-    public static PredictInfoDTO fromLunar(Lunar lunar, GenderEnum genderEnum) {
-        PredictInfoDTO predictInfo = new PredictInfoDTO();
+    public static PredictInfoVO fromLunar(Lunar lunar, TesterDTO tester) {
+        PredictInfoVO predictInfo = new PredictInfoVO();
 
         predictInfo.setFullDescription(lunar.toFullString());
 
@@ -66,36 +67,39 @@ public class PredictInfoDTO {
         }
 
 
-
-
         // 八字
         EightChar eightChar = lunar.getEightChar();
 
-        predictInfo.setEightChar(EightCharDTO.fromEightChar(eightChar));
-
-
+        predictInfo.setEightChar(EightCharVO.fromEightChar(eightChar));
 
 
         // 大运
-        Yun yun = eightChar.getYun(genderEnum.getValue());
-        predictInfo.setDaYunList(PredictInfoDTO.makeDaYunList(yun));
+        Yun yun = eightChar.getYun(tester.getGender().getValue());
+        predictInfo.setDaYunList(PredictInfoVO.makeDaYunList(yun));
 
         LunarTime lunarTime = lunar.getTime();
         predictInfo.setLunar(lunar.getYearInChinese() + " " + lunar.getMonthInChinese() + " " + lunar.getDayInChinese() + " " + lunarTime.getZhi());
 
         predictInfo.setSolar(lunar.getSolar().toYmdHms());
+
+        predictInfo.setBaseInfoList(predictInfo.generateBaseInfoList());
         return predictInfo;
     }
 
-    protected static List<DaYunDTO>  makeDaYunList(Yun yun) {
-        List<DaYunDTO> list = new ArrayList<>();
+    protected static List<DaYunVO> makeDaYunList(Yun yun) {
+        List<DaYunVO> list = new ArrayList<>();
 
         Arrays.stream(yun.getDaYun())
                 .skip(1)
                 .forEach(item -> {
-            list.add(DaYunDTO.fromDaYun(item));
-        });
+                    list.add(DaYunVO.fromDaYun(item));
+                });
 
+        return list;
+    }
+
+    protected List<PredictBaseInfoVO> generateBaseInfoList() {
+        List<PredictBaseInfoVO> list = new ArrayList<>();
         return list;
     }
 }

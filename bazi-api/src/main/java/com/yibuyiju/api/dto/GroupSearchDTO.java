@@ -1,5 +1,6 @@
 package com.yibuyiju.api.dto;
 
+import com.yibuyiju.api.dto.BSearch;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

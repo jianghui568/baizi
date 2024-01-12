@@ -1,8 +1,8 @@
 package com.yibuyiju.api.controller;
 
-import com.yibuyiju.api.dto.PredictInfoDTO;
-import com.yibuyiju.api.dto.TesterInfoDTO;
+import com.yibuyiju.api.dto.TesterDTO;
 import com.yibuyiju.api.service.DestinyService;
+import com.yibuyiju.api.vo.PredictInfoVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +24,11 @@ public class DestinyController {
 
     @ApiOperation(value = "预测", httpMethod = "POST")
     @PostMapping("/destiny/predict")
-    public PredictInfoDTO predict(@RequestBody TesterInfoDTO testerInfoDTO) {
+    public PredictInfoVO predict(@RequestBody TesterDTO tester) {
 
 
-        PredictInfoDTO predictInfoDTO = destinyService.baziInfo(testerInfoDTO);
+        PredictInfoVO predictInfo = destinyService.baziInfo(tester);
 
-        return predictInfoDTO;
+        return predictInfo;
     }
 }

@@ -1,10 +1,10 @@
 package com.yibuyiju.api.service;
 
 import com.nlf.calendar.Lunar;
-import com.yibuyiju.api.dto.PredictInfoDTO;
-import com.yibuyiju.api.dto.TesterInfoDTO;
+import com.yibuyiju.api.dto.TesterDTO;
 import com.yibuyiju.api.enums.CalendarEnum;
 import com.yibuyiju.api.util.Helps;
+import com.yibuyiju.api.vo.PredictInfoVO;
 import com.yibuyiju.common.exception.VerifyBizException;
 import org.springframework.stereotype.Service;
 
@@ -18,28 +18,27 @@ import org.springframework.stereotype.Service;
 @Service
 public class DestinyService {
 
-    public PredictInfoDTO baziInfo(TesterInfoDTO testerInfoDTO) {
+    public PredictInfoVO baziInfo(TesterDTO tester) {
 
-        if (!CalendarEnum.contain(testerInfoDTO.getCalendarType())) {
+        if (!CalendarEnum.contain(tester.getCalendarType())) {
             throw new VerifyBizException("日历类型错误！");
         }
 
         Lunar lunar;
-
         // 阳历
-        if (testerInfoDTO.getCalendarType().equals(CalendarEnum.SOLAR)) {
-            lunar = Lunar.fromDate(Helps.localDateTimeToDate(testerInfoDTO.getBirthday()));
+        if (tester.getCalendarType().equals(CalendarEnum.SOLAR)) {
+            lunar = Lunar.fromDate(Helps.localDateTimeToDate(tester.getBirthday()));
         } else {
             lunar = Lunar.fromYmdHms(
-                    testerInfoDTO.getBirthday().getYear(),
-                    testerInfoDTO.getBirthday().getMonthValue(),
-                    testerInfoDTO.getBirthday().getDayOfMonth(),
-                    testerInfoDTO.getBirthday().getHour(),
-                    testerInfoDTO.getBirthday().getMinute(),
+                    tester.getBirthday().getYear(),
+                    tester.getBirthday().getMonthValue(),
+                    tester.getBirthday().getDayOfMonth(),
+                    tester.getBirthday().getHour(),
+                    tester.getBirthday().getMinute(),
                     0
             );
         }
 
-        return PredictInfoDTO.fromLunar(lunar, testerInfoDTO.getGender());
+        return PredictInfoVO.fromLunar(lunar, tester);
     }
 }

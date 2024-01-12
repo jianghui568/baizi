@@ -1,8 +1,6 @@
-package com.yibuyiju.api.dto;
+package com.yibuyiju.api.vo;
 
 import com.nlf.calendar.EightChar;
-import com.nlf.calendar.LunarTime;
-import com.nlf.calendar.eightchar.Yun;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -15,7 +13,7 @@ import java.util.List;
  */
 @Accessors(chain = true)
 @Data
-public class EightCharDTO {
+public class EightCharVO {
     private String yearGan;
     private String yearDiShi;
     private String yearGanShiShen;
@@ -49,8 +47,8 @@ public class EightCharDTO {
     private List<String> timeHideGan;
 
 
-    public static EightCharDTO fromEightChar(EightChar eightChar) {
-        EightCharDTO eight = new EightCharDTO();
+    public static EightCharVO fromEightChar(EightChar eightChar) {
+        EightCharVO eight = new EightCharVO();
 
         eight.setYearGan(eightChar.getYearGan())
                 .setYearZhi(eightChar.getYearZhi())

@@ -1,6 +1,6 @@
 package com.yibuyiju.api.controller;
 
-import com.yibuyiju.api.dto.TesterInfoDTO;
+import com.yibuyiju.api.dto.TesterDTO;
 import com.yibuyiju.api.dto.UserDTO;
 import com.yibuyiju.api.entity.UserEntity;
 import com.yibuyiju.api.mapstruct.UserConverter;
@@ -41,14 +41,14 @@ public class TestController {
 
 
     @PostMapping("/test3")
-    public Object save(@RequestBody TesterInfoDTO test) {
+    public Object save(@RequestBody TesterDTO test) {
 
         return test;
     }
 
 
     @PostMapping("/test1")
-    public String index1(@RequestBody TesterInfoDTO testerInfoDTO) {
+    public String index1(@RequestBody TesterDTO testerInfoDTO) {
 
         log.error("xxxxxxxxxxxx1111111x{}", testerInfoDTO);
         System.err.println(testerInfoDTO);

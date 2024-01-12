@@ -1,11 +1,6 @@
-package com.yibuyiju.api.dto;
+package com.yibuyiju.api.vo;
 
-import com.nlf.calendar.EightChar;
-import com.nlf.calendar.Lunar;
-import com.nlf.calendar.LunarTime;
 import com.nlf.calendar.eightchar.LiuNian;
-import com.nlf.calendar.eightchar.Yun;
-import com.yibuyiju.api.enums.GenderEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -16,7 +11,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class LiuYearDTO {
+public class LiuYearVO {
 
     private Integer year;
     private Integer age;
@@ -24,8 +19,8 @@ public class LiuYearDTO {
     private String xun;
     private String xunKong;
 
-    public static LiuYearDTO fromLunar(LiuNian liuNian) {
-        LiuYearDTO nian = new LiuYearDTO();
+    public static LiuYearVO fromLunar(LiuNian liuNian) {
+        LiuYearVO nian = new LiuYearVO();
         nian.setYear(liuNian.getYear())
                 .setAge(liuNian.getAge())
                 .setGanZhi(liuNian.getGanZhi())

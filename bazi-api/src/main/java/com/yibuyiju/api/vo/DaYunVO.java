@@ -1,4 +1,4 @@
-package com.yibuyiju.api.dto;
+package com.yibuyiju.api.vo;
 
 import com.nlf.calendar.eightchar.DaYun;
 import lombok.Data;
@@ -15,28 +15,29 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-public class XiaoYunDTO {
+public class DaYunVO {
     private Integer startYear;
     private Integer endYear;
     private Integer startAge;
     private Integer endAge;
     private String solar;
     private String ganZhi;
-    private List<LiuYearDTO> liuYearList;
+    private List<LiuYearVO> liuYearList;
 
 
-    public static XiaoYunDTO fromDaYun(DaYun daYun) {
-        XiaoYunDTO da = new XiaoYunDTO();
+    public static DaYunVO fromDaYun(DaYun daYun) {
+
+        DaYunVO da = new DaYunVO();
         da.setStartYear(daYun.getStartYear())
                 .setEndYear(daYun.getEndYear())
                 .setStartAge(daYun.getStartAge())
                 .setEndAge(daYun.getEndAge())
                 .setGanZhi(daYun.getGanZhi());
 
-        List<LiuYearDTO> list = new ArrayList<>();
+        List<LiuYearVO> list = new ArrayList<>();
         Arrays.stream(daYun.getLiuNian())
                 .forEach(item -> {
-                    list.add(LiuYearDTO.fromLunar(item));
+                    list.add(LiuYearVO.fromLunar(item));
                 });
 
         da.setLiuYearList(list);

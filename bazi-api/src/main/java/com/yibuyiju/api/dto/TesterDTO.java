@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  */
 
 @Data
-public class TesterInfoDTO implements Serializable {
+public class TesterDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     //
     @ApiModelProperty(value = "是否为真太阳时")
