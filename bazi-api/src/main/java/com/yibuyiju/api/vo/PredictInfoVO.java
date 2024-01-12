@@ -25,6 +25,10 @@ import java.util.Objects;
 public class PredictInfoVO {
 
     private List<PredictBaseInfoVO> baseInfoList;
+    private String name;
+    private String gender;
+    private String xingZuo;
+    private String xiu;
     private String lunar;
     private String fullDescription;
     private String solar;
@@ -40,10 +44,17 @@ public class PredictInfoVO {
     private String gong;
     private EightCharVO eightChar;
     private List<DaYunVO> daYunList;
+    private String kongYear;
+    private String gongMonth;
+    private String gongDay;
+    private String gongHour;
 
     public static PredictInfoVO fromLunar(Lunar lunar, TesterDTO tester) {
         PredictInfoVO predictInfo = new PredictInfoVO();
 
+        predictInfo.setXingZuo(lunar.getSolar().getXingZuo());
+
+        predictInfo.setXiu(lunar.getXiu());
         predictInfo.setFullDescription(lunar.toFullString());
 
         predictInfo.setShengXiao(lunar.getYearShengXiao());

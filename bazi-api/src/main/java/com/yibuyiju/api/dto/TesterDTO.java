@@ -19,6 +19,10 @@ import java.time.LocalDateTime;
 public class TesterDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     //
+
+    @ApiModelProperty(value = "用户名")
+    private String name;
+
     @ApiModelProperty(value = "是否为真太阳时")
     private Boolean isSolarTime;
 
