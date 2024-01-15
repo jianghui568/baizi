@@ -129,6 +129,7 @@ public class PredictInfoVO {
         List<PredictBaseInfoVO> list = new ArrayList<>();
         list.add(PredictBaseInfoVO.builder().title("姓名：").subTitle(this.name).build());
         list.add(PredictBaseInfoVO.builder().title("性别：").subTitle(this.gender).build());
+        list.add(PredictBaseInfoVO.builder().title("生肖：").subTitle(this.shengXiao).build());
         list.add(PredictBaseInfoVO.builder().title("阴历：").subTitle(this.solar).build());
         list.add(PredictBaseInfoVO.builder().title("阳历：").subTitle(this.lunar).build());
 
@@ -142,7 +143,7 @@ public class PredictInfoVO {
         list.add(PredictBaseInfoVO.builder().title("命宫：").subTitle(lunarExtend.getMingGong()).build());
         list.add(PredictBaseInfoVO.builder().title("身宫：").subTitle(lunarExtend.getShenGong()).build());
         list.add(PredictBaseInfoVO.builder().title("胎元：").subTitle(lunarExtend.getTaiYuan()).build());
-        list.add(PredictBaseInfoVO.builder().title("：").subTitle(this.xiu).build());
+        list.add(PredictBaseInfoVO.builder().title("起大运：").subTitle(this.xiu).build());
         return list;
     }
 }
