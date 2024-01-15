@@ -76,6 +76,11 @@ public class LunarExtend {
         return "";
     }
 
+    /**
+     * https://wenku.baidu.com/view/2412bf2675c66137ee06eff9aef8941ea66e4b5b.html?_wkts_=1705312607983&bdQuery=%E5%85%AB%E5%AD%97%E8%BA%AB%E5%AE%AB%E9%80%9F%E7%AE%97&needWelcomeRecommand=1
+     *
+     * @return
+     */
     public String getShenGong() {
         return "寅";
 
