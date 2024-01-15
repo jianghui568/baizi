@@ -5,6 +5,7 @@ import com.nlf.calendar.Lunar;
 import com.nlf.calendar.LunarTime;
 import com.nlf.calendar.eightchar.Yun;
 import com.yibuyiju.api.dto.TesterDTO;
+import com.yibuyiju.api.util.LunarExtend;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -49,10 +50,20 @@ public class PredictInfoVO {
     private String gongDay;
     private String gongHour;
 
-    public static PredictInfoVO fromLunar(Lunar lunar, TesterDTO tester) {
+    private String xunKongYear;
+    private String xunKongMonth;
+    private String xunKongDay;
+    private String xunKongHour;
+
+    public static PredictInfoVO fromLunar(LunarExtend lunarExtend, TesterDTO tester) {
         PredictInfoVO predictInfo = new PredictInfoVO();
 
+        Lunar lunar = lunarExtend.getLunar();
+
+        predictInfo.setName(tester.getName());
+        predictInfo.setGender(tester.getGender().getText());
         predictInfo.setXingZuo(lunar.getSolar().getXingZuo());
+
 
         predictInfo.setXiu(lunar.getXiu());
         predictInfo.setFullDescription(lunar.toFullString());
@@ -68,11 +79,11 @@ public class PredictInfoVO {
             predictInfo.setJieQiCurrentDateTime(lunar.getCurrentJieQi().getSolar().toYmdHms());
         }
 
-        if (Objects.nonNull(lunar.getPrevJieQi().getName())) {
+        if (Objects.nonNull(lunar.getPrevJieQi()) && Objects.nonNull(lunar.getPrevJieQi().getName())) {
             predictInfo.setJieQiPrev(lunar.getPrevJieQi().getName());
             predictInfo.setJieQiPrevDateTime(lunar.getPrevJieQi().getSolar().toYmdHms());
         }
-        if (Objects.nonNull(lunar.getNextJieQi().getName())) {
+        if (Objects.nonNull(lunar.getNextJieQi()) && Objects.nonNull(lunar.getNextJieQi().getName())) {
             predictInfo.setJieQiNext(lunar.getNextJieQi().getName());
             predictInfo.setJieQiNextDateTime(lunar.getNextJieQi().getSolar().toYmdHms());
         }
@@ -83,6 +94,11 @@ public class PredictInfoVO {
 
         predictInfo.setEightChar(EightCharVO.fromEightChar(eightChar));
 
+        // 空亡
+        predictInfo.setXunKongHour(eightChar.getTimeXunKong());
+        predictInfo.setXunKongDay(eightChar.getDayXunKong());
+        predictInfo.setXunKongMonth(eightChar.getMonthXunKong());
+        predictInfo.setXunKongYear(eightChar.getYearXunKong());
 
         // 大运
         Yun yun = eightChar.getYun(tester.getGender().getValue());
@@ -93,7 +109,7 @@ public class PredictInfoVO {
 
         predictInfo.setSolar(lunar.getSolar().toYmdHms());
 
-        predictInfo.setBaseInfoList(predictInfo.generateBaseInfoList());
+        predictInfo.setBaseInfoList(predictInfo.generateBaseInfoList(lunarExtend));
         return predictInfo;
     }
 
@@ -109,8 +125,24 @@ public class PredictInfoVO {
         return list;
     }
 
-    protected List<PredictBaseInfoVO> generateBaseInfoList() {
+    protected List<PredictBaseInfoVO> generateBaseInfoList(LunarExtend lunarExtend) {
         List<PredictBaseInfoVO> list = new ArrayList<>();
+        list.add(PredictBaseInfoVO.builder().title("姓名：").subTitle(this.name).build());
+        list.add(PredictBaseInfoVO.builder().title("性别：").subTitle(this.gender).build());
+        list.add(PredictBaseInfoVO.builder().title("阴历：").subTitle(this.solar).build());
+        list.add(PredictBaseInfoVO.builder().title("阳历：").subTitle(this.lunar).build());
+
+        String jieQi = this.jieQiPrev + " " + this.jieQiPrevDateTime + "  " + this.jieQiNext + " " + this.jieQiNextDateTime;
+        list.add(PredictBaseInfoVO.builder().title("出生节气：").subTitle(jieQi).build());
+        list.add(PredictBaseInfoVO.builder().title("星座：").subTitle(this.xingZuo).build());
+        list.add(PredictBaseInfoVO.builder().title("二十八宿：").subTitle(this.xiu).build());
+
+        String xunKong = this.xunKongYear + " " + this.xunKongMonth + " " + this.xunKongDay + " " + this.xunKongHour;
+        list.add(PredictBaseInfoVO.builder().title("空亡(年月日时)：").subTitle(xunKong).build());
+        list.add(PredictBaseInfoVO.builder().title("命宫：").subTitle(lunarExtend.getMingGong()).build());
+        list.add(PredictBaseInfoVO.builder().title("身宫：").subTitle(lunarExtend.getShenGong()).build());
+        list.add(PredictBaseInfoVO.builder().title("胎元：").subTitle(lunarExtend.getTaiYuan()).build());
+        list.add(PredictBaseInfoVO.builder().title("：").subTitle(this.xiu).build());
         return list;
     }
 }

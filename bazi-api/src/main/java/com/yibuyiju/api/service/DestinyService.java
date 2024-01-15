@@ -4,6 +4,7 @@ import com.nlf.calendar.Lunar;
 import com.yibuyiju.api.dto.TesterDTO;
 import com.yibuyiju.api.enums.CalendarEnum;
 import com.yibuyiju.api.util.Helps;
+import com.yibuyiju.api.util.LunarExtend;
 import com.yibuyiju.api.vo.PredictInfoVO;
 import com.yibuyiju.common.exception.VerifyBizException;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,6 @@ public class DestinyService {
             );
         }
 
-        return PredictInfoVO.fromLunar(lunar, tester);
+        return PredictInfoVO.fromLunar(LunarExtend.fromLunar(lunar), tester);
     }
 }

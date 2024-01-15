@@ -1,5 +1,6 @@
 package com.yibuyiju.api.vo;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Data;
  * @date 2024/1/12 14:48
  */
 @Data
+@Builder
 public class PredictBaseInfoVO {
     private String title;
     private String subTitle;
