@@ -1,4 +1,4 @@
-package com.yibuyiju.api.vo;
+package com.yibuyiju.api.vo.destiny;
 
 import com.nlf.calendar.eightchar.DaYun;
 import lombok.Data;

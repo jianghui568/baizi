@@ -1,4 +1,4 @@
-package com.yibuyiju.api.util;
+package com.yibuyiju.api.util.eightchar;
 
 import cn.hutool.core.util.ArrayUtil;
 import com.nlf.calendar.Lunar;
@@ -40,6 +40,11 @@ public class LunarExtend {
 
     public static LunarExtend fromLunar(Lunar lunar) {
         return new LunarExtend(lunar);
+    }
+
+
+    public static String getZhangSheng(String gan, String zhi) {
+        return ZhangSheng.getZhangSheng(gan, zhi);
     }
 
     public Lunar getLunar() {
