@@ -3,9 +3,12 @@ package com.yibuyiju.api.util.eightchar;
 import cn.hutool.core.util.ArrayUtil;
 import com.nlf.calendar.Lunar;
 import com.nlf.calendar.util.LunarUtil;
+import org.apache.commons.lang3.StringUtils;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -18,21 +21,6 @@ public class LunarExtend {
 
     private Lunar lunar;
 
-    private Map<String, Integer> diZhiNumMap = new HashMap<String, Integer>() {{
-
-        put("寅", 1);
-        put("卯", 2);
-        put("辰", 3);
-        put("巳", 4);
-        put("午", 5);
-        put("未", 6);
-        put("申", 7);
-        put("酉", 8);
-        put("戌", 9);
-        put("亥", 10);
-        put("子", 11);
-        put("丑", 12);
-    }};
 
     LunarExtend(Lunar lunar) {
         this.lunar = lunar;
@@ -44,7 +32,40 @@ public class LunarExtend {
 
 
     public static String getZhangSheng(String gan, String zhi) {
-        return ZhangSheng.getZhangSheng(gan, zhi);
+        if (StringUtils.isEmpty(gan)) {
+            return "";
+        }
+        String[] list = ConfigBiao.ZHANGSHENG.get(gan);
+        if (Objects.isNull(list) || list.length == 0) {
+            return "";
+        }
+        for (int i = 0; i < list.length; i++) {
+            if (list[i].equals(zhi)) {
+                return ConfigBiao.ZHANGSHENG_LIST[i];
+            }
+        }
+        return "";
+    }
+
+    public List<String> getYearShenSha()
+    {
+        List<String> list = new ArrayList<>();
+        return list;
+    }
+    public List<String> getMonthShenSha()
+    {
+        List<String> list = new ArrayList<>();
+        return list;
+    }
+    public List<String> getDayShenSha()
+    {
+        List<String> list = new ArrayList<>();
+        return list;
+    }
+    public List<String> getHourShenSha()
+    {
+        List<String> list = new ArrayList<>();
+        return list;
     }
 
     public Lunar getLunar() {
@@ -59,8 +80,8 @@ public class LunarExtend {
      * @return
      */
     public String getMingGong() {
-        Integer month = diZhiNumMap.get(this.lunar.getEightChar().getMonthZhi());
-        Integer hour = diZhiNumMap.get(this.lunar.getEightChar().getTimeZhi());
+        Integer month = ConfigBiao.ZHI_NUM_MAP.get(this.lunar.getEightChar().getMonthZhi());
+        Integer hour = ConfigBiao.ZHI_NUM_MAP.get(this.lunar.getEightChar().getTimeZhi());
 
         Integer mh = month + hour;
         Integer benWei = 14;
@@ -69,11 +90,7 @@ public class LunarExtend {
         }
         Integer gongZhi = benWei - mh;
 
-        Optional<String> foundKey = diZhiNumMap.entrySet()
-                .stream()
-                .filter(entry -> entry.getValue().equals(gongZhi))
-                .map(Map.Entry::getKey)
-                .findFirst();
+        Optional<String> foundKey = ConfigBiao.ZHI_NUM_MAP.entrySet().stream().filter(entry -> entry.getValue().equals(gongZhi)).map(Map.Entry::getKey).findFirst();
 
         if (foundKey.isPresent()) {
             return foundKey.get();
