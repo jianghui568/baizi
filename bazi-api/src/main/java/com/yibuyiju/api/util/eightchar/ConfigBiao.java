@@ -1,7 +1,13 @@
 package com.yibuyiju.api.util.eightchar;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author yjh
@@ -158,6 +164,23 @@ public class ConfigBiao {
                 new String[]{"卯", "丑"},
         });
     }};
+
+    public static String getShenShaGan(String gan, String zhi) {
+        if (StringUtils.isEmpty(gan)) {
+            return "";
+        }
+        String[][] list = ConfigBiao.SHENSHA_GAN.get(gan);
+        if (Objects.isNull(list) || list.length == 0) {
+            return "";
+        }
+        List<String> res = new ArrayList<>();
+        for (int i = 0; i < list.length; i++) {
+            if (list[i].length > 0 && Arrays.asList(list[i]).contains(zhi)) {
+                return ConfigBiao.SHENSHA_GAN_LIST[i];
+            }
+        }
+        return "";
+    }
 
     /**
      * 二、月支查法

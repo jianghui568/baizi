@@ -22,12 +22,14 @@ public class LunarExtend {
     private Lunar lunar;
 
 
-    LunarExtend(Lunar lunar) {
+    public LunarExtend(Lunar lunar) {
         this.lunar = lunar;
     }
 
     public static LunarExtend fromLunar(Lunar lunar) {
-        return new LunarExtend(lunar);
+        LunarExtend le = new LunarExtend(lunar);
+        le.generateShenSha();
+        return le;
     }
 
 
@@ -47,23 +49,47 @@ public class LunarExtend {
         return "";
     }
 
-    public List<String> getYearShenSha()
-    {
+    public void generateShenSha() {
+
+    }
+
+    public List<String> getShenShaYear() {
+        String ygan = this.lunar.getEightChar().getYearGan();
+        String yzhi = this.lunar.getEightChar().getYearZhi();
+        String mgan = this.lunar.getEightChar().getMonthGan();
+        String mzhi = this.lunar.getEightChar().getMonthZhi();
+        String dgan = this.lunar.getEightChar().getDayGan();
+        String dzhi = this.lunar.getEightChar().getDayZhi();
+        String hgan = this.lunar.getEightChar().getTimeGan();
+        String hzhi = this.lunar.getEightChar().getTimeZhi();
+
+        String shenSha;
+
+        List<String> ylist = new ArrayList<>();
+        List<String> mlist = new ArrayList<>();
+        List<String> dlist = new ArrayList<>();
+        List<String> hlist = new ArrayList<>();
+
+        shenSha = ConfigBiao.getShenShaGan(ygan, yzhi);
+        ylist.add(shenSha);
+        shenSha = ConfigBiao.getShenShaGan(dgan, yzhi);
+        ylist.add(shenSha);
+
+
+        return ylist;
+    }
+
+    public List<String> getShenShaMonth() {
         List<String> list = new ArrayList<>();
         return list;
     }
-    public List<String> getMonthShenSha()
-    {
+
+    public List<String> getShenShaDay() {
         List<String> list = new ArrayList<>();
         return list;
     }
-    public List<String> getDayShenSha()
-    {
-        List<String> list = new ArrayList<>();
-        return list;
-    }
-    public List<String> getHourShenSha()
-    {
+
+    public List<String> getShenShaHour() {
         List<String> list = new ArrayList<>();
         return list;
     }
